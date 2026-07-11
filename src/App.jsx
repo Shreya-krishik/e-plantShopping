@@ -1,49 +1,41 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import ProductList from "./components/ProductList";
 
-import React, { useState } from 'react';
-import ProductList from './ProductList';
-import './App.css';
-import AboutUs from './AboutUs';
-
-function App() {
-  
-  const [showProductList, setShowProductList] = useState(false);
-
-  const handleGetStartedClick = () => {
-    setShowProductList(true);
-  };
-
-  const handleHomeClick = () => {
-    setShowProductList(false);
-  };
-
+function LandingPage() {
   return (
-    <div className="app-container">
-      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
-        <div className="background-image"></div>
-        <div className="content">
-         <div className="landing_content">
-         <h1>Welcome To Paradise Nursery</h1>
-          <div className="divider"></div>
-          <p>Where Green Meets Serenity</p>
-         
-          <button className="get-started-button" onClick={handleGetStartedClick}>
-            Get Started
-          </button>
-         </div>
-          <div className="aboutus_container">
-          <AboutUs/>
-          </div>
-          </div>
+    <div className="landing-page">
+      <div className="overlay">
+        <div className="hero">
+          <h1>Paradise Nursery</h1>
 
-      </div>
-      <div className={`product-list-container ${showProductList ? 'visible' : ''}`}>
-        <ProductList onHomeClick={handleHomeClick}/>
+          <p>
+            Welcome to Paradise Nursery, your one-stop destination for beautiful
+            indoor plants. Discover a wide collection of healthy houseplants to
+            make your home greener, fresher, and more peaceful.
+          </p>
+
+          <Link to="/plants">
+            <button className="get-started-btn">
+              Get Started
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
 }
 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/plants" element={<ProductList />} />
+      </Routes>
+    </Router>
+  );
+}
+
 export default App;
-
-
-
